@@ -65,60 +65,6 @@ const contract = require("@0xcert/ethereum-erc721/build/nf-token-enumerable.json
 console.log(contract);
 ```
 
-### Remix IDE (Ethereum only)
-
-You can quickly deploy a contract with this library using [Remix IDE](https://remix.ethereum.org). Here is one example.
-
-You have created and have possession of unique glass-blown artwork (each having a serial/lot number) which you would like to sell using the Ethereum or Wanchain mainnet. You will sell non-fungible tokens and the buyers would be able to trade those to other people. One token per piece of artwork. You commit to anybody holding these tokens that they may redeem their token and take physical possession of the art.
-
-To do this, simply paste the code below into Remix and deploy the smart contract. You will "mint" a token for each new piece of artwork you want to see. Then you will "burn" that token when you surrender physical possession of the piece.
-
-```solidity
-pragma solidity ^0.8.0;
-
-import "https://github.com/0xcert/ethereum-erc721/src/contracts/tokens/nf-token-metadata.sol";
-import "https://github.com/0xcert/ethereum-erc721/src/contracts/ownership/ownable.sol";
-
-/**
- * @dev This is an example contract implementation of NFToken with metadata extension.
- */
-contract MyArtSale is
-  NFTokenMetadata,
-  Ownable
-{
-
-  /**
-   * @dev Contract constructor. Sets metadata extension `name` and `symbol`.
-   */
-  constructor()
-  {
-    nftName = "Frank's Art Sale";
-    nftSymbol = "FAS";
-  }
-
-  /**
-   * @dev Mints a new NFT.
-   * @param _to The address that will own the minted NFT.
-   * @param _tokenId of the NFT to be minted by the msg.sender.
-   * @param _uri String representing RFC 3986 URI.
-   */
-  function mint(
-    address _to,
-    uint256 _tokenId,
-    string calldata _uri
-  )
-    external
-    onlyOwner
-  {
-    super._mint(_to, _tokenId);
-    super._setTokenUri(_tokenId, _uri);
-  }
-
-}
-```
-
-*You should contact a lawyer before holding an auction, or selling anything. Specifically, laws for auctions vary wildly by jurisdiction. This application is provided only as an example of the technology and is not legal advice.*
-
 ## Validation
 
 You can check the validity of the smart contract, the correctness of the implementation and the supported functions of the respective smart contract using the online validator at https://erc721validator.org/.
@@ -137,7 +83,7 @@ We already deployed some contracts to the [Ropsten](https://ropsten.etherscan.io
 
 ### Wanchain - testnet
 
-We already deployed some contracts to [testnet](http://testnet.wanscan.org/) network. You can play with them RIGHT NOW. No need to install software. In this test version of the contract, anybody can `mint` or `burn` tokens, so don't use it for anything important.
+Already deployed some contracts to [testnet](http://testnet.wanscan.org/) network. No need to install software. In this test version of the contract, anybody can `mint` or `burn` tokens, so don't use it for anything important.
 
 | Contract                                                     | Token address | Transaction hash |
 | ------------------------------------------------------------ | ------------- | ---------------- |
@@ -145,18 +91,3 @@ We already deployed some contracts to [testnet](http://testnet.wanscan.org/) net
 | [`nf-token-metadata.sol`](src/contracts/tokens/nf-token-metadata.sol) | [0xF0a3852BbFC67ba9936E661fE092C93804bf1c81](http://testnet.wanscan.org/address/0xF0a3852BbFC67ba9936E661fE092C93804bf1c81)          | [0x338ca779405d39c0e0f403b01679b22603c745828211b5b2ea319affbc3e181b](http://testnet.wanscan.org/tx/0x338ca779405d39c0e0f403b01679b22603c745828211b5b2ea319affbc3e181b)             |
 | [`nf-token-enumerable.sol`](src/contracts/tokens/nf-token-enumerable.sol) | [0x539d2CcBDc3Fc5D709b9d0f77CaE6a82e2fec1F3](http://testnet.wanscan.org/address/0x539d2CcBDc3Fc5D709b9d0f77CaE6a82e2fec1F3)          | [0x755886c9a9a53189550be162410b2ae2de6fc62f6791bf38599a078daf265580](http://testnet.wanscan.org/tx/0x755886c9a9a53189550be162410b2ae2de6fc62f6791bf38599a078daf265580)             |
 
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to help out.
-
-## Bug bounty
-
-You are somebody that reads the documentation of smart contracts and understands how the ERC-721 Token Reference Implementation works. So you have unique skills and your time is valuable. We will pay you for your contributions to this project in the form of bug reports.
-
-If your project depends on ERC-721 or you want to help improve the assurance of this project then you can pledge a bounty. This means you will commit to paying researchers that demonstrate a problem. Contact us at [bounty@0xcert.org](mailto:bounty@0xcert.org) if interested. Thank you.
-
-Read the full [bug bounty program](BUG_BOUNTY.md).
-
-## Licence
-
-See [LICENSE](./LICENSE) for details.
